@@ -1,0 +1,46 @@
+.container{
+    width: 40vw;
+    margin: 15vh auto;
+    padding: 5vh 0;
+    border: 1px solid #6cb3ff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+.header{
+    font-size: 3vw;
+    text-align: center;
+    margin-bottom: 2vh;
+}
+.text{
+    font-size: 1vw;
+    text-align: center;
+    margin-right: 7vw;
+    margin-bottom: 2vh;
+}
+.input-field{
+    width: 25%;
+    padding: 1vw;
+    margin-left: 35%;
+    margin-bottom: 2vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#loginButton{
+    margin-top: 5vh;
+}
+.button{
+    width: 30%;
+    padding: 1vw;
+    margin-left: 35%;
+    margin-bottom: 2vh;
+    border: none;
+    border-radius: 5px;
+    background-color: #6cb3ff;
+    color: white;
+    font-size: 1vw;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: #5aa0e0;
+}

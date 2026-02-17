@@ -7,7 +7,7 @@ import com.leofriedman.projectmanager.model.Project;
 import com.leofriedman.projectmanager.service.ProjectService;
 
 @RestController
-@RequestMapping("api/Projects")
+@RequestMapping("api/projects")
 public class ProjectController 
 {
     private final ProjectService service;
