@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+<body style="background-color: rgb(181, 229, 246);">
+    <div class="toolbar">
+        <h1 class="text"id="title">Project Manager</h1>
+        <h1 class="options" id="hamburger">&#9776;</h1>
+        <div class="pop-up" id="options-pop-up">
+            <p class="pop-up-text" id="settings">Account Settings</p>
+            <p class="pop-up-text" id="logout">Logout</p>
+        </div>
+    </div>
+    <div class="container" id="message">
+        <h1 class="header">Welcome Back User!</h1>
+    </div>
+    <div class="collumn">
+        <div class="dashboard" id="dashboard0">
+            <h1 class="header">Projects</h1>
+            <button class="button" id="new">+ New Project</button>
+            <p class="projectList">No projects... Why not create one?</p>
+        </div>
+        <div class="dashboard" id="dashboard1">
+        </div>
+    </div>
+    <script src="./js/dashboard.js"></script>
+</body>
+</html>

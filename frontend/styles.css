@@ -14,9 +14,17 @@
 }
 .text{
     font-size: 1vw;
-    text-align: center;
-    margin-right: 7vw;
+    text-align: left;
+    margin-left: 14vw;
     margin-bottom: 2vh;
+}
+.text-error{
+    display: none;
+    color: #ff0000;
+    margin-left: 14vw;
+    font-size: .5vw;
+    text-align: left;
+    margin-bottom: 1vh;
 }
 .input-field{
     width: 25%;
@@ -43,4 +51,33 @@
 }
 .button:hover{
     background-color: #5aa0e0;
+}
+.collumn{
+    display: flex;
+}
+.options{
+    cursor: pointer;
+}
+.options:hover{
+    transform: scale(1.1);
+}
+.pop-up{
+    display: none;
+    position: absolute;
+    border: 1px solid #6cb3ff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff    
+}
+.pop-up-text{
+    color: #6cb3ff;
+    text-align: left;
+    font-size: 15px;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.pop-up-text:hover{
+    color:#5aa0e0;
 }

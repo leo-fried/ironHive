@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import com.leofriedman.projectmanager.exception.UserException;
 import com.leofriedman.projectmanager.dto.UserRegistration;
 import com.leofriedman.projectmanager.model.User;
 import com.leofriedman.projectmanager.repository.UserRepository;
@@ -32,7 +31,7 @@ public class UserService {
             user.setPassword(hash);
             return repository.save(user);
         } catch (Exception e) {
-            throw new UserException("Failed to register user: " + e.getMessage());
+            throw new RuntimeException("Failed to register user: " + e.getMessage());
         }
     }
     /**
@@ -53,7 +52,7 @@ public class UserService {
     }
     public User getUserById(Long id)
     {
-        return repository.findById(id).orElseThrow(() -> new UserException("User with ID: " + id + " not found"));
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("User with ID: " + id + " not found"));
     }
     public User getUserByUsername(String username)
     {
