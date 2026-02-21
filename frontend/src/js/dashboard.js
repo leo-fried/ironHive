@@ -68,7 +68,8 @@ entrySave.addEventListener("click", () => {
     fetch("http://localhost:8080/api/lifts", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authentication": `Bearer ${token}`
         },
         body: JSON.stringify({ title, description, date })
     })

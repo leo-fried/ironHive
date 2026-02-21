@@ -8,7 +8,7 @@ import jakarta.persistence.*;
  * User Class
  */
 @Entity
-@Table(name="users")
+@Table(name="users", uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"}))
 public class User {
     @Id // Primary Key
     @GeneratedValue(strategy = GenerationType.IDENTITY)

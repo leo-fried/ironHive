@@ -3,6 +3,6 @@ package com.leofriedman.projectmanager.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.leofriedman.projectmanager.model.*;
 
-public interface ExercizeRepository extends JpaRepository<Exercise, Long> {
+public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     
 }

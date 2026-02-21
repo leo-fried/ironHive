@@ -63,9 +63,7 @@
 .text-error{
     display: none;
     color: #ff0000;
-    margin-left: 14vw;
-    font-size: .5vw;
-    text-align: left;
+    font-size: .75vw;
     margin-bottom: 1vh;
 }
 .input-field{

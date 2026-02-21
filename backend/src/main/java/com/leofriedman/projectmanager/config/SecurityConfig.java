@@ -58,7 +58,8 @@ public class SecurityConfig {
         return http
             .cors(Customizer.withDefaults())
             .csrf(csrf -> csrf.disable()) // Disable CSRF protection for testing
-            .authorizeHttpRequests(auth -> auth.anyRequest().authenticated()) // Disable all authentication
+            .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users", "/sendEmail").permitAll() // Allow registration and email sending
+            .anyRequest().authenticated()) // Disable all authentication
             .oauth2ResourceServer(converter -> converter.jwt(Customizer.withDefaults()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .httpBasic(Customizer.withDefaults())

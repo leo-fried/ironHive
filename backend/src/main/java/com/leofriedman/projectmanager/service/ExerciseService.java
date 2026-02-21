@@ -5,14 +5,14 @@ import java.util.List;
 
 import com.leofriedman.projectmanager.dto.ExerciseEntry;
 import com.leofriedman.projectmanager.model.Exercise;
-import com.leofriedman.projectmanager.repository.ExercizeRepository;
+import com.leofriedman.projectmanager.repository.ExerciseRepository;
 
 @Service
 public class ExerciseService {
 
-    private final ExercizeRepository repository;
+    private final ExerciseRepository repository;
     
-    public ExerciseService(ExercizeRepository repository)
+    public ExerciseService(ExerciseRepository repository)
     {
         this.repository = repository;
     }

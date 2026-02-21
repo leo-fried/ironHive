@@ -13,25 +13,39 @@ import com.leofriedman.projectmanager.repository.UserRepository;
 public class UserService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
-    public UserService(UserRepository repository, PasswordEncoder passwordEncoder)
+    public UserService(UserRepository repository, PasswordEncoder passwordEncoder, EmailService emailService)
     {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
-
+        this.emailService = emailService;
     }
     public User registerUser(UserRegistration userRegistration)
     {
         try{
+
             User user = new User();
 
             user.setUsername(userRegistration.getUsername());
             user.setEmail(userRegistration.getEmail());
             String hash = passwordEncoder.encode(userRegistration.getPassword());
             user.setPassword(hash);
-            return repository.save(user);
+
+            // Attempt to save user before sending email
+            User savedUser = repository.save(user);
+            // Send confirmation email
+            emailService.sendEmail(userRegistration.getEmail(),
+                                   "Verify your Iron Hive Account",
+                                "Thank you for registering with Iron Hive!\n\n\n" +
+                                "Your Friends. Your Tools. One Place.\n\n" +
+                                "We are so excited to have you on the platform and hope you take full advantage of all it has to offer!\n\n\n" +
+                                "Please click the link below so that you can sign in and use the application.\n\n" +
+                                "*LINK PLACEHOLDER*\n\n\n" +
+                                "-Iron Hive Team");
+            return savedUser;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to register user: " + e.getMessage());
+            throw new RuntimeException("Failed to register user: " + e);
         }
     }
 

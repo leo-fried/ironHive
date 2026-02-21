@@ -1,7 +1,9 @@
 package com.leofriedman.projectmanager.dto;
+import com.leofriedman.projectmanager.validation.UniqueUser;
 
 import jakarta.validation.constraints.*;
 
+@UniqueUser // Ensure Username and email are unique
 public class UserRegistration {
     // Name of User
     @NotBlank(message = "Username must not be blank")

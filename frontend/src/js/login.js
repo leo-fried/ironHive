@@ -29,8 +29,7 @@ login.addEventListener("click", () => {
         method: "POST",
         headers: {
             "Authorization": `Basic ${basicAuth}`
-        }//,
-        //body: JSON.stringify({ username, password })
+        }
     })
     .then(response => {
         if (response.ok) {
@@ -43,7 +42,6 @@ login.addEventListener("click", () => {
     .then(token => {
         sessionStorage.setItem("jwt", token);
         window.location.href = "./src/dashboard.html";
-        
     })
     .catch(error => {
         console.error(error);
