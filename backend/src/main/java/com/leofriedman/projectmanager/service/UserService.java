@@ -4,6 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.leofriedman.projectmanager.dto.UserRegistration;
 import com.leofriedman.projectmanager.model.User;
@@ -20,6 +21,7 @@ public class UserService {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
+
     }
     public User registerUser(UserRegistration userRegistration)
     {
@@ -27,13 +29,21 @@ public class UserService {
 
             User user = new User();
 
+            UUID uuid = UUID.randomUUID();
+            String hashedId = uuid.toString();
+            user.setHashedId(hashedId);
+
             user.setUsername(userRegistration.getUsername());
             user.setEmail(userRegistration.getEmail());
             String hash = passwordEncoder.encode(userRegistration.getPassword());
             user.setPassword(hash);
 
-            // Attempt to save user before sending email
+            // Save once to generate the ID so we can hash it
             User savedUser = repository.save(user);
+
+            // Create email link with hashed ID
+            VerificationService verification = new VerificationService();
+            String link = verification.generateLink(hashedId);
             // Send confirmation email
             emailService.sendEmail(userRegistration.getEmail(),
                                    "Verify your Iron Hive Account",
@@ -41,7 +51,7 @@ public class UserService {
                                 "Your Friends. Your Tools. One Place.\n\n" +
                                 "We are so excited to have you on the platform and hope you take full advantage of all it has to offer!\n\n\n" +
                                 "Please click the link below so that you can sign in and use the application.\n\n" +
-                                "*LINK PLACEHOLDER*\n\n\n" +
+                                link + "\n(Please note this link will expire after 10 minutes. Please do not share it with anyone.)\n\n\n" +
                                 "-Iron Hive Team");
             return savedUser;
         } catch (Exception e) {
@@ -58,6 +68,10 @@ public class UserService {
     {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("User with ID: " + id + " not found"));
     }
+    public User getUserByHashedId(String hashedId)
+    {
+        return repository.findByHashedId(hashedId);
+    }
     public User getUserByUsername(String username)
     {
         return repository.findByUsername(username);
@@ -73,7 +87,7 @@ public class UserService {
             user.setPassword(hash);
         }
         user.setEmail(updatedUser.getEmail());
-        user.setLoggedIn(updatedUser.isLoggedIn());
+        user.setVerified(updatedUser.isVerified());
         return repository.save(user);
     }
     public User patchUsername(Long id, User updatedUser)
@@ -95,10 +109,16 @@ public class UserService {
         user.setEmail(updatedUser.getEmail());
         return repository.save(user);
     }
-    public User patchLoggedIn(Long id, User updatedUser)
+    public User patchVerified(Long id, User updatedUser)
     {
         User user = getUserById(id);
-        user.setLoggedIn(updatedUser.isLoggedIn());
+        user.setVerified(updatedUser.isVerified());
+        return repository.save(user);
+    }
+    public User patchVerified(String hashedId, User updatedUser)
+    {
+        User user = getUserByHashedId(hashedId);
+        user.setVerified(updatedUser.isVerified());
         return repository.save(user);
     }
   

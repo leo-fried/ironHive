@@ -38,7 +38,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500"));
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:8080"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
 
@@ -58,7 +58,7 @@ public class SecurityConfig {
         return http
             .cors(Customizer.withDefaults())
             .csrf(csrf -> csrf.disable()) // Disable CSRF protection for testing
-            .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users", "/sendEmail").permitAll() // Allow registration and email sending
+            .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users/**", "/api/users/verify/**", "/sendEmail").permitAll() // Allow registration and email sending
             .anyRequest().authenticated()) // Disable all authentication
             .oauth2ResourceServer(converter -> converter.jwt(Customizer.withDefaults()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

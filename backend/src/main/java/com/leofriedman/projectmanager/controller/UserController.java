@@ -40,6 +40,16 @@ public class UserController
     {
         return service.updateUser(id, user);
     }
+
+    @PatchMapping("/verify/{hashedId}")
+    public String verifyUser(@PathVariable String hashedId, @RequestBody User user)
+    {   
+        //System.out.println("HELLO WORLD!");
+        service.patchVerified(hashedId, user);
+        return "redirect:http://127.0.0.1:5500/frontend/src/verify.html"; //redirect user
+
+    }
+
     @PatchMapping("/{id}")
     public User patchUser(@PathVariable Long id, @RequestBody User user, @RequestParam String patch)
     {
@@ -52,7 +62,7 @@ public class UserController
             case "email":
                 return service.patchEmail(id, user);
             case "loggedIn":
-                return service.patchLoggedIn(id, user);
+                return service.patchVerified(id, user);
             default:
                 throw new IllegalArgumentException("Invalid patch parameter: " + patch);
         }

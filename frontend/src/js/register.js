@@ -39,7 +39,7 @@ register.addEventListener("click", () => {
     })
     .then(response => {
         if (response.ok) {
-            alert("Account created successfully! Please verify your email.");
+            alert("Account created successfully! Please verify your email. If you do not see an email please check your spam folder.");
             window.location.href = "../index.html";
         }
         else return response.json();

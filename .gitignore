@@ -32,8 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 
-### Certs ####
-backend/src/main/java/com/leofriedman/resources/certs/
-backend/src/main/resources/certs/private.pem
-.gitignore
-backend/src/main/resources/certs/public.pem
+### Secrets ###
+*.pem
+*.key

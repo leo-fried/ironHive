@@ -14,6 +14,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // User ID
 
+    private String hashedId; // Hashed User ID
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lift> lifts; // List of Lifts associated with the User
 
@@ -25,8 +27,8 @@ public class User {
 
     private String email;
 
-    // Whether the user has logged in
-    private boolean loggedIn = false;
+    // Whether the user has been verified
+    private boolean verified = false;
 
     /**
      * Default Constructor
@@ -43,6 +45,15 @@ public class User {
         return id;
     }
 
+    public String getHashedId()
+    {
+        return hashedId;
+    }
+
+    public void setHashedId(String hashedId)
+    {
+        this.hashedId = hashedId;
+    }
     /**
      * Gets the User username
      * @return the User username
@@ -89,19 +100,19 @@ public class User {
         this.email = email;
     }
     /**
-     * Checks if the User is loggedIn
-     * @return true if the User is loggedIn, false otherwise
+     * Checks if the User is verified
+     * @return true if the User is verified, false otherwise
      */
-    public boolean isLoggedIn() {
-        return loggedIn;
+    public boolean isVerified() {
+        return verified;
     }
 
     /**
-     * Sets the User as loggedIn or not
-     * @param loggedIn true if the User is loggedIn, false otherwise
+     * Sets the User as verified or not
+     * @param verified true if the User is verified, false otherwise
      */
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
     public List<Lift> getLifts() {
