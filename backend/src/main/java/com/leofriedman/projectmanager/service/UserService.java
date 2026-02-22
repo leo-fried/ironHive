@@ -3,6 +3,7 @@ package com.leofriedman.projectmanager.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,8 +31,10 @@ public class UserService {
             User user = new User();
 
             UUID uuid = UUID.randomUUID();
+            LocalDateTime verificationExpiration = LocalDateTime.now().plusMinutes(1); // Create expiration
             String hashedId = uuid.toString();
             user.setHashedId(hashedId);
+            user.setVerificationExpiration(verificationExpiration);
 
             user.setUsername(userRegistration.getUsername());
             user.setEmail(userRegistration.getEmail());

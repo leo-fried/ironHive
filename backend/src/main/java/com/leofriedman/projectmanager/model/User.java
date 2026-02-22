@@ -1,5 +1,6 @@
 package com.leofriedman.projectmanager.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -29,6 +30,8 @@ public class User {
 
     // Whether the user has been verified
     private boolean verified = false;
+
+    private LocalDateTime verificationExpiration;
 
     /**
      * Default Constructor
@@ -113,6 +116,13 @@ public class User {
      */
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public LocalDateTime getVerificationExpiration() {
+        return verificationExpiration;
+    }
+    public void setVerificationExpiration(LocalDateTime verificationExpiration) {
+        this.verificationExpiration = verificationExpiration;
     }
 
     public List<Lift> getLifts() {

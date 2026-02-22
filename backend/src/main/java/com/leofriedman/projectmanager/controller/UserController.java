@@ -2,6 +2,8 @@ package com.leofriedman.projectmanager.controller;
 
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.leofriedman.projectmanager.dto.UserRegistration;
@@ -42,12 +44,15 @@ public class UserController
     }
 
     @PatchMapping("/verify/{hashedId}")
-    public String verifyUser(@PathVariable String hashedId, @RequestBody User user)
-    {   
-        //System.out.println("HELLO WORLD!");
-        service.patchVerified(hashedId, user);
-        return "redirect:http://127.0.0.1:5500/frontend/src/verify.html"; //redirect user
+    public User verifyUser(@PathVariable String hashedId, @RequestBody User user)
+    {  
+        // Get complete user info 
+        User u = service.getUserByHashedId(hashedId);
+        if (u == null) return user;
 
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expTime = u.getVerificationExpiration();
+        return now.isBefore(expTime) ? service.patchVerified(hashedId, user) : user; // Only verify the user if the link is valid.
     }
 
     @PatchMapping("/{id}")

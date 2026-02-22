@@ -9,6 +9,16 @@ const uuid = urlParams.get('uuid');
 
 if(uuid)
 {
+    fetch("http://localhost:8080/api/users/isExpired")
+        .then(response => response.JSON())
+        .then(data => {
+            // Link is expired
+            if(data){
+                alert("This link has expired. Redirecting to login");
+                window.location.href = "../index.html";
+            }
+            else return;
+        })
     fetch(`http://localhost:8080/api/users/verify/${uuid}`,{
         method: 'PATCH',
         headers: {
